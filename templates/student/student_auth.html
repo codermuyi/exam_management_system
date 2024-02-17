@@ -1,0 +1,129 @@
+{% include 'navbar.html' %}
+
+{% include 'main.html' %}
+
+{% block content %}
+
+<style>
+  main {
+    display: grid;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .messages .error {
+    color: red;
+  }
+  h1 {
+    text-align: center;
+  }
+  form {
+    background-color: var(--sec);
+    width: 100%;
+    max-width: 500px;
+    margin: 3rem auto 1rem;
+    padding: 3rem;
+    border-radius: 10px;
+  }
+  .input-group {
+    display: grid;
+    margin-bottom: 10px;
+    gap: 3px;
+  }
+  label {
+    text-transform: capitalize;
+  }
+  .input-group input {
+    padding: 1rem;
+    border-radius: 10px;
+    width: 100%;
+  }
+  .acct-prompt {
+    text-align: center;
+    margin-bottom: 3rem;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+  }
+</style>
+
+<main>
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</li>
+    {% endfor %}
+  </ul>
+  {% endif%}
+
+  {% if page == 'login' %}
+  <h1>Login</h1>
+  <div>
+    <form method="POST">
+      {% csrf_token %}
+
+      <div class='input-group'>
+        <label>Matric Number (F.ND.21.3820999):</label>
+        <input type="text" name="username" placeholder="Enter Matric no." required />
+      </div>
+      
+      <div class='input-group'>
+        <label>Password:</label>
+        <input type="password" name="password" placeholder="Enter Password" required >
+      </div>
+      <input type="submit" value="Log In" />
+    </form>
+
+    <div class="acct-prompt">
+      <p>Don&apos;t have an account?</p>
+      <a href="{% url 'student-signup' %}" class="button">Sign up</a>
+    </div>
+  </div> 
+
+  {% else %}
+
+  <h1>Sign up</h1>
+  <div>
+    <form method="POST">
+      {% csrf_token %}
+      
+      {% for field in userForm %}
+      {% if field.label == 'Username' %}
+
+      <div class='input-group'>
+        <label for='id_{{field.name}}'>Matric Number (F.ND.21.3210999):</label>
+        {{field}}
+      </div>
+
+      {% else %}
+
+      <div class='input-group'>
+        <label for='id_{{field.name}}'>{{ field.label }}: </label>
+        {{field}}
+      </div>
+
+      {% endif %}
+      {% endfor %}
+
+      {% for field in studentForm %}
+
+      <div class='input-group'>
+        <label for='id_{{field.name}}'>{{ field.label }}: </label>
+        {{field}}
+      </div>
+
+      {% endfor %}
+     
+      <input type="submit" value="Sign Up" />
+    </form>
+
+    <div class="acct-prompt">
+      <p>Already have an account?</p>
+      <a href="{% url 'student-login' %}" class="button">Log In</a>
+    </div>
+  </div>
+  
+  {% endif%}
+  
+</main>
+
+{% endblock %}

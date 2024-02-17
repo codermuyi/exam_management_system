@@ -1,0 +1,71 @@
+{% load active_link_tags %}
+
+<div class="sidebar" data-color="green" data-background-color="white" data-image="/static/assets/img/sidebar-1.jpg">
+  <div class="logo">
+    <a rel="noopener noreferrer" 
+        href="/account/" class="simple-text logo-normal">
+      EMS
+    </a>
+  </div>
+  <div class="sidebar-wrapper">
+    <ul class="nav">
+    {% if request.user.is_authenticated %}
+
+      <li class="nav-item {% active_link 'student-dashboard' %}">
+        <a class="nav-link" href="{% url 'student-dashboard' %}">
+          <i class="material-icons">dashboard</i>
+          <p>Dashboard</p>
+        </a>
+      </li>
+      <li class="nav-item {% active_link 'student-profile' %}">
+        <a class="nav-link" href="{% url 'student-profile' %}">
+          <i class="material-icons">person</i>
+          <p>Student Profile</p>
+        </a>
+      </li>
+      <li class="nav-item {% active_link 'student-schedule' %}">
+        <a class="nav-link" href="{% url 'student-schedule' %}">
+          <i class="material-icons">calendar_today</i>
+          <p>Today's Schedule</p>
+        </a>
+      </li>
+      <li class="nav-item {% active_link 'student-timetable' %}">
+        <a class="nav-link" href="{% url 'student-timetable' %}">
+          <i class="material-icons">table</i>
+          <p>Exam Timetable</p>
+        </a>
+      </li>
+      <li class="nav-item {% active_link 'student-notification' %}">
+        <a class="nav-link" href="{% url 'student-notification' %}">
+          <i class="material-icons">notifications</i>
+          <p>Notifications</p>
+        </a>
+      </li>
+      <li class="nav-item {% active_link 'student-map' %}">
+        <a class="nav-link" href="{%url 'student-map' %}">
+          <i class="material-icons">location_ons</i>
+          <p>College Map</p>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="{% url 'logout' %}" >
+          <i class="material-icons">directions_run</i>
+          <p>Logout</p>
+        </a>
+      </li>
+
+      <li class="nav-item active-pro ">
+        <a class="nav-link" href="">
+          <i class="material-icons">unarchive</i>
+          <p>Student</p>
+        </a>
+      </li>
+
+    {% else %}
+
+      <p>You can&apos;t access this section</p>
+    {% endif %}
+    </ul>
+  </div>
+
+</div>

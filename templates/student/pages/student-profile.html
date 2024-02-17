@@ -1,0 +1,105 @@
+{% extends "student/dashboard.html" %} 
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %} Student Profile {% endblock %}
+
+{% block stylesheets %}{% endblock stylesheets %} 
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card card-profile">
+      <div class="card-avatar">
+        <a href="">
+          <img class="img" src="/static/assets/img/faces/marc.jpg" />
+          {% comment %} <img class="img" src="{% static student.profile_pic.path %}" alt="Profile" /> {% endcomment %}
+        </a>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">{{ student.get_name }}</h4>
+        <h6 class="card-category text-gray">{{ matric_no }}</h6>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header card-header-success">
+        <h4 class="card-title">Edit Profile</h4>
+        <p class="card-category">Complete your profile</p>
+      </div>
+      <div class="card-body">
+        <form method="POST" action="" class='mt-5'>
+          <div class="row">
+            <div class="col-md-5">
+              <div class="form-group">
+                <label class="bmd-label-floating">Matric Number (disabled)</label>
+                {% render_field userForm.username class='form-control' disabled=true %}
+              </div>
+            </div>
+            <div class="col-md-7">
+              <div class="form-group">
+                <label class="bmd-label-floating">Email address</label>
+                {% render_field userForm.email class='form-control' %}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">Fist Name</label>
+                {% render_field userForm.first_name class='form-control' %}
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">Last Name</label>
+                {% render_field userForm.last_name class='form-control' %}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">Adress</label>
+                {% render_field studentForm.address class='form-control' %}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label class="bmd-label-floating">Phone Number</label>
+                {% render_field studentForm.mobile class='form-control' %}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5">
+              <div class="form-group">
+                <label class="bmd-label-floating">Department</label>
+                {% render_field studentForm.department class='form-control' disabled=true %}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="bmd-label-floating">Level</label>
+                {% render_field studentForm.level class='form-control' disabled=true %}
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-info pull-right">
+            Update Profile
+          </button>
+          <div class="clearfix"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+{% endblock javascripts %}

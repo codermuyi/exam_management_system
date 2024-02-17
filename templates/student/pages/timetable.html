@@ -1,0 +1,123 @@
+{% extends "student/dashboard.html" %} 
+
+{% block title %} Exam Timetable {% endblock %}
+
+{% block stylesheets %}
+{% endblock stylesheets %} 
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-success">
+        <h4 class="card-title">{{timetable.get_name}}</h4>
+        <p class="card-category">{{timetable.department.name}}</p>
+      </div>
+      <div class="card-body mt-4">
+        <p class='text-info'>* Venue will be set an hour before exam</p>
+        {% if timetable.exam_set.all %}
+        
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="text-info">
+              <th>Day</th>
+              <th>Date</th>
+              <th>Course</th>
+              <th>Type</th>
+              <th>Start time</th>
+              <th>End time</th>
+              <th>Venue</th>
+            </thead>
+            <tbody>
+              {% for exam in timetable.exam_set.all %}
+                <tr>
+                  <td class="text-success text-capitalize">{{exam.get_day}}</td>
+                  <td>{{exam.date}}</td>
+                  <td><span class="font-weight-bold">{{exam.course.course_code}}</span>: {{ exam.course.course_name }}</td>
+                  <td><span class="font-weight-bold {% if exam.type == 'cbt' %}text-uppercase{% endif %}">{{exam.type}}</span></td>
+                  <td class="text-uppercase">{{exam.start_time}}</td>
+                  <td class="text-uppercase">{{exam.end_time}}</td>
+                  <td>{% if exam.venue.name %} {{exam.venue.name}} {% else %} Venue not set {% endif%}</td>
+                </tr>
+              {% endfor %}              
+            </tbody>
+          </table>
+        </div>
+
+        {% else %}
+            <p>No exams available.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% comment %} <div class="col-md-12">
+    <div class="card card-plain">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title mt-0">Table on Plain Background</h4>
+        <p class="card-category">Here is a subtitle for this table</p>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead class="">
+              <th>ID</th>
+              <th>Name</th>
+              <th>Country</th>
+              <th>City</th>
+              <th>Salary</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Dakota Rice</td>
+                <td>Niger</td>
+                <td>Oud-Turnhout</td>
+                <td>$36,738</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Minerva Hooper</td>
+                <td>Curaçao</td>
+                <td>Sinaai-Waas</td>
+                <td>$23,789</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Sage Rodriguez</td>
+                <td>Netherlands</td>
+                <td>Baileux</td>
+                <td>$56,142</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Philip Chaney</td>
+                <td>Korea, South</td>
+                <td>Overland Park</td>
+                <td>$38,735</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Doris Greene</td>
+                <td>Malawi</td>
+                <td>Feldkirchen in Kärnten</td>
+                <td>$63,542</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Mason Porter</td>
+                <td>Chile</td>
+                <td>Gloucester</td>
+                <td>$78,615</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div> {% endcomment %}
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}{% endblock javascripts %}

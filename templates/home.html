@@ -1,0 +1,76 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+
+  main {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    text-align: center;
+  }
+  h1 {
+    text-align: center;
+  }
+  a {
+    text-decoration: none;
+  }
+  .cards {
+    display: flex;
+    gap: 1rem;
+  }
+  .home-card {
+    border: 3px solid var(--pry);
+    border-radius: 1rem;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 2px 2px rgba(255, 255, 255, 0.3);
+  }
+  .home-card a {
+    padding: 4rem;
+    color: inherit;
+    display: inherit;
+  }
+  .home-card:hover {
+    background-color: var(--pry);
+    color: white;
+  }
+  .home-card h3 {
+    font-size: 1.7rem;
+  }
+
+  footer {
+    text-align: center;
+  }
+</style>
+
+<main>
+  <h1>Exam Management System</h1>
+  <div class="cards">
+    <div class="home-card">
+      <a href="{% url 'student-login' %}">
+        <h3>Student</h3>
+        <p>Login as a student</p>
+      </a>
+    </div>
+    <div class="home-card">
+      <a href="">
+        <h3>Invigilator</h3>
+        <p>Login as an invigilator</p>
+      </a>
+    </div>
+    <div class="home-card">
+      <a href="{% url 'admin-login' %}">
+        <h3>Exam Officer</h3>
+        <p>Login as an exam officer</p>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>@ 2024</p>
+</footer>
+
+{% endblock %}
