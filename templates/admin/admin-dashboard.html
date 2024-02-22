@@ -1,33 +1,48 @@
 {% extends "admin/dashboard.html" %}
-
+{% load widget_tweaks %}
 {% block title %} Dashboard {% endblock %} 
 
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
 
-<h1>Hello, {{request.user.first_name}}</h1>
+<h1>Welcome back</h1>
 <div class="row">
   <div class="col-md-6">
     <div class="card card-stats">
-      <div class="card-header card-header-info card-header-icon pb-3">
-        <div class="card-icon">
+      <div class="card-header _card-header-info _card-header-icon pb-3">
+        {% comment %} <div class="card-icon">
           <i class="material-icons">content_copy</i>
-        </div>
-        <h3 class="card-categor text-success">Available exams</h3>
-        <h3 class="card-title">9/9
+        </div> {% endcomment %}
+        <h3 class="_card-category text-success">Select School</h3>
+        {% comment %} <h3 class="card-title">9/9
           <small>courses</small>
-        </h3>
+        </h3> {% endcomment %}
+        <div class="card-body">
+        <form method="POST" action="">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-9">
+              <div class="form-group">
+                {% render_field adminForm.school class='form-control' %}
+              </div>
+            </div>
+            <div class="col-md-2">
+              <button type="submit" class="btn btn-info">Save</button>
+            </div>
+          </div>
+        </form>
       </div>
-      <div class="card-footer">
+      </div>
+      {% comment %} <div class="card-footer">
         <div class="stats">
           <i class="material-icons text-warning">info_outline</i>
           <a href="{% url 'student-timetable' %}">More info...</a>
         </div>
-      </div>
+      </div> {% endcomment %}
     </div>
   </div>
-  <div class="col-md-4">
+  {% comment %} <div class="col-md-4">
     <div class="card card-chart">
       <div class="card-header card-header-success">
         <div class="card-icon" style='background: white; font-size: 2rem; padding: 1.3rem;'>
@@ -45,7 +60,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
 </div>
 <div class="row">
   {% for course in courses %}

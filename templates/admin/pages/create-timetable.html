@@ -1,0 +1,61 @@
+{% extends "admin/dashboard.html" %}
+{% load widget_tweaks %}
+
+{% block title %} UI Icons {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="card card-plain">
+    <div class="card-header card-header-success">
+      <h4 class="card-title">Create Exam Timetable</h4>
+      <p class="card-category"></p>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-xl-8">
+        <div class="card-body">
+          <div class="">
+            <form method="POST" action="" class='mt-3'>
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Department</label>
+                    {% render_field timetableForm.department class='form-control' %}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Level</label>
+                    {% render_field timetableForm.student_level class='form-control' %}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Semester</label>
+                    {% render_field timetableForm.semester class='form-control' %}
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-info pull-left">
+                Create
+              </button>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

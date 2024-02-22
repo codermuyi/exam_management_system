@@ -1,0 +1,84 @@
+{% extends "admin/dashboard.html" %} 
+
+{% block title %} Exam Timetable {% endblock %}
+
+{% block stylesheets %}
+{% endblock stylesheets %} 
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    {% for dep in departments %}
+        
+    <div class="card mb-5">
+      <div class="card-header card-header-success mb-3">
+        <h3 class="card-title">{{dep.name}}</h3>
+        {% comment %} <p class="card-category">{{timetable.department.name}} </p> {% endcomment %}
+      </div>
+      
+      {% for timetable in dep.examtimetable_set.all %}
+
+      <div class="card-body">
+        <h4>{{timetable.get_name}}</h4>
+        {% comment %} <p class='text-info'>* Venue will be set an hour before exam</p> {% endcomment %}
+
+        {% if timetable.exam_set.all %}
+        
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="text-info">
+              <th>Day</th>
+              <th>Date</th>
+              <th>Course</th>
+              <th>Type</th>
+              <th>Start time</th>
+              <th>End time</th>
+              <th>Venue</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              {% for exam in timetable.exam_set.all %}
+                <tr>
+                  <td class="text-success text-capitalize">{{exam.get_day}}</td>
+                  <td>{{exam.date}}</td>
+                  <td><span class="font-weight-bold">{{exam.course.course_code}}</span>: {{ exam.course.course_name }}</td>
+                  <td><span class="font-weight-bold {% if exam.type == 'cbt' %}text-uppercase{% endif %}">{{exam.type}}</span></td>
+                  <td class="text-uppercase">{{exam.start_time}}</td>
+                  <td class="text-uppercase">{{exam.end_time}}</td>
+                  <td>{% if exam.venue.name %} {{exam.venue.name}} {% else %} Venue not set {% endif%}</td>
+                  <td class="td-actions">
+                    <a href="{% url 'admin-schedule-edit-each' exam.id %}">
+                      <button type="button" rel="tooltip" title="Edit Schedule" class="btn btn-success btn-link btn-sm">
+                        <i class="material-icons">edit</i>
+                      </button>
+                    </a>
+                    <a href="{% url 'admin-delete-schedule' exam.id %}">
+                      <button type="button" rel="tooltip" title="Remove Schedule" class="btn btn-danger btn-link btn-sm">
+                        <i class="material-icons">close</i>
+                      </button>
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}              
+            </tbody>
+          </table>
+        </div>
+
+        {% else %}
+            <p>No exams available.</p>
+        {% endif %}
+
+      </div>
+
+      {% endfor %}
+
+    </div>
+    
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}{% endblock javascripts %}

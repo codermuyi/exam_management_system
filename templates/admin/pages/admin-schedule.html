@@ -1,0 +1,88 @@
+{% extends "admin/dashboard.html" %}
+{% load widget_tweaks %}
+
+{% block title %} UI Icons {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="card card-plain">
+    <div class="card-header card-header-success">
+      <h4 class="card-title">Create Exam Schedule</h4>
+      <p class="card-category"></p>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-xl-8">
+        <div class="card-body">
+          <div class="">
+            <form method="POST" action="" class='mt-3'>
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Timetable</label>
+                    {% render_field examForm.timetable class='form-control' %}
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Course</label>
+                    {% render_field examForm.course class='form-control' %}
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Type</label>
+                    {% render_field examForm.type class='form-control' %}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Date</label>
+                    {% render_field examForm.date class='form-control' type='date' %}
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Start Time</label>
+                    {% render_field examForm.start_time class='form-control' type='time' %}
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">End Time</label>
+                    {% render_field examForm.end_time class='form-control' type='time' %}
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Venue</label>
+                    {% render_field examForm.venue class='form-control' %}
+                  </div>
+                </div>
+              </div> 
+              
+              <button type="submit" class="btn btn-info pull-left">
+                Create Schedule
+              </button>
+            </form>
+          </div>
+          {% comment %} <div class="col-md-12 d-none d-sm-block d-md-block d-lg-none d-block d-sm-none text-center ml-auto mr-auto">
+            <h5>The icons are visible on Desktop mode inside an iframe. Since the iframe is not working on Mobile and Tablets please visit the icons on their original page on Google. Check the
+              <a href="https://design.google.com/icons/" target="_blank">Material Icons</a>
+            </h5>
+        </div> {% endcomment %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

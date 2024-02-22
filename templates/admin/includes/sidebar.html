@@ -23,13 +23,25 @@
           <p>Profile</p>
         </a>
       </li>
+      <li class="nav-item {% active_link 'admin-create-timetable' %}">
+        <a class="nav-link" href="{% url 'admin-create-timetable' %}">
+          <i class="material-icons">table_chart</i>
+          <p>Create Timetable</p>
+        </a>
+      </li>
       <li class="nav-item {% active_link 'admin-schedule' %}">
         <a class="nav-link" href="{% url 'admin-schedule' %}">
           <i class="material-icons">calendar_today</i>
           <p>Schedule Exam</p>
         </a>
       </li>
-      {% comment %} <li class="nav-item {% active_link 'admin-timetable' %}">
+      <li class="nav-item {% active_link 'admin-schedule-edit' %}">
+        <a class="nav-link" href="{% url 'admin-schedule-edit' %}">
+          <i class="material-icons">edit</i>
+          <p>Edit Schedule</p>
+        </a>
+      </li>
+      {% comment %} 2 <li class="nav-item {% active_link 'admin-timetable' %}">
         <a class="nav-link" href="{% url 'admin-timetable' %}">
           <i class="material-icons">table</i>
           <p>Exam Timetable</p>
@@ -40,13 +52,13 @@
           <i class="material-icons">notifications</i>
           <p>Notifications</p>
         </a>
-      </li>
+      </li> {% endcomment %}
       <li class="nav-item ">
         <a class="nav-link" href="{% url 'logout' %}" >
           <i class="material-icons">directions_run</i>
           <p>Logout</p>
         </a>
-      </li> {% endcomment %}
+      </li>
 
       <li class="nav-item active-pro ">
         <a class="nav-link" href="">

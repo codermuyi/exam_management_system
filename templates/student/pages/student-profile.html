@@ -30,12 +30,27 @@
         <p class="card-category">Complete your profile</p>
       </div>
       <div class="card-body">
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          <li {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</li>
+          {% endfor %}
+        </ul>
+        {% endif%}
+        {% if userForm_errors %}
+          <ul class="errorlist error">
+            {% for error in userForm_errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
         <form method="POST" action="" class='mt-5'>
+          {% csrf_token %}
           <div class="row">
             <div class="col-md-5">
               <div class="form-group">
                 <label class="bmd-label-floating">Matric Number (disabled)</label>
-                {% render_field userForm.username class='form-control' disabled=true %}
+                {% render_field userForm.username class='form-control' %}
               </div>
             </div>
             <div class="col-md-7">
@@ -79,20 +94,19 @@
             <div class="col-md-5">
               <div class="form-group">
                 <label class="bmd-label-floating">Department</label>
-                {% render_field studentForm.department class='form-control' disabled=true %}
+                {% render_field studentForm.department class='form-control' %}
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label class="bmd-label-floating">Level</label>
-                {% render_field studentForm.level class='form-control' disabled=true %}
+                {% render_field studentForm.level class='form-control' %}
               </div>
             </div>
           </div>
           <button type="submit" class="btn btn-info pull-right">
             Update Profile
           </button>
-          <div class="clearfix"></div>
         </form>
       </div>
     </div>
